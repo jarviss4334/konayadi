@@ -3,14 +3,18 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>PER PARADA MYRE 💬</title>
+  <title>SAY YOUR NAME</title>
   <link rel="stylesheet" href="bijo.css" />
 </head>
 <body>
+  <!-- 🔥 SLIDESHOW LAYERS -->
+  <div id="slide1" class="slideshow-layer top"></div>
+  <div id="slide2" class="slideshow-layer"></div>
+
   <!-- Overlay for name input -->
   <div class="overlay">
     <div class="popup">
-      <h2>PER PARADA MYRE 🔥</h2>
+      <h2>WHAT'S YOUR NAME NIGGA!☠️</h2>
       <input type="text" id="nameInput" placeholder="Enter your name..." maxlength="20" />
       <button id="joinBtn">Join Chat</button>
     </div>
@@ -19,30 +23,37 @@
   <!-- Main Chat App -->
   <div id="app" class="hidden">
     <header class="topbar">
-      <h1 id="heading" class="glow-text">AVARATHAM PARAYUKA POVUKA ✨</h1>
+      <h1 id="heading" class="glow-text">CHAT FOR FUN NOT FOR GUNS🌛❤️</h1>
+
       <div class="menuWrap">
         <button id="menuDots" class="threeDots">⋮</button>
         <div id="menuPopup" class="menuPopup hidden">
-          <button id="createRoom" class="menuItem">🌟 Create Room</button>
+          <button id="createRoom" class="menuItem">👻 Create Room</button>
           <button id="joinRoom" class="menuItem">🔑 Join Room</button>
+
+          <!-- 🔥 MUSIC TOGGLE BUTTON -->
+          <button id="toggleMusic" class="menuItem">🎵 Music: OFF</button>
         </div>
       </div>
     </header>
 
     <div class="content">
-      <!-- Sidebar -->
       <aside class="sidebar">
         <h3>Active Users 👥</h3>
         <ul id="membersList"></ul>
       </aside>
 
-      <!-- Chat Column -->
       <section class="chatColumn">
-        <div class="messages" aria-live="polite"></div>
+        <div class="messages"></div>
         <div class="typingIndicator"></div>
 
         <div class="inputBar">
-          <button id="leaveRoom" class="hidden" style="position: absolute; left: 18px; bottom: 18px; z-index:50;">🚪 Leave Room</button>
+          <button id="leaveRoom"
+            class="hidden"
+            style="position: absolute; left: 18px; bottom: 18px; z-index:50;">
+            🚪 Leave Room
+          </button>
+
           <input id="messageInput" type="text" placeholder="Type a message..." autocomplete="off" />
           <button id="sendBtn">➤</button>
         </div>
@@ -50,7 +61,10 @@
     </div>
   </div>
 
+  <!-- 🔥 HIDDEN AUDIO PLAYER -->
+  <audio id="bgMusic" preload="auto"></audio>
+
   <script src="/socket.io/socket.io.js"></script>
   <script src="reby.js"></script>
-</body> 
+</body>
 </html>
