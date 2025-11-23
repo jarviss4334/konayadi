@@ -68,69 +68,25 @@ body{
 .inputBar input{flex:1;padding:12px;border-radius:999px;border:none;outline:none;background:rgba(255,255,255,0.92);color:#111}
 .inputBar button{width:48px;height:48px;border-radius:999px;border:none;background:var(--gold);color:#111;font-weight:800;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,0.45)}
 
-/* small screens (MOBILE FIX) */
+/* small screens */
 @media(max-width:780px){
-
-  body {
-    overflow: auto !important;
-  }
-
-  .content {
-    flex-direction: column;
-    height: calc(100vh - 70px) !important;
-    padding: 6px;
-    gap: 6px;
-  }
-
-  .sidebar {
-    display: block !important;
-    width: 100% !important;
-    height: auto !important;
-    padding: 10px;
-    border-radius: 10px;
-    margin-bottom: 6px;
-  }
-
-  .chatColumn {
-    flex: 1 !important;
-    height: calc(100vh - 230px) !important;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .messages {
-    flex: 1;
-    overflow-y: auto !important;
-    padding-bottom: 90px !important;
-  }
-
-  .inputBar {
-    position: fixed !important;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: rgba(0,0,0,0.55);
-    padding: 12px !important;
-    z-index: 9999;
-    backdrop-filter: blur(8px);
-  }
-
-  .inputBar input {
-    padding: 12px !important;
-  }
-
-  .inputBar button {
-    width: 46px !important;
-    height: 46px !important;
-  }
-
-  #leaveRoom {
-    bottom: 80px !important;
-    left: 15px !important;
-    z-index: 9999;
-  }
+  body { overflow: auto !important; }
+  .content { flex-direction: column; height: calc(100vh - 70px) !important; padding: 6px; gap: 6px; }
+  .sidebar { display: block !important; width: 100% !important; height: auto !important; padding: 10px; border-radius: 10px; margin-bottom: 6px; }
+  .chatColumn { flex: 1 !important; height: calc(100vh - 230px) !important; display: flex; flex-direction: column; }
+  .messages { flex: 1; overflow-y: auto !important; padding-bottom: 90px !important; }
+  .inputBar { position: fixed !important; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.55); padding: 12px !important; z-index: 9999; backdrop-filter: blur(8px); }
+  .inputBar input { padding: 12px !important; }
+  .inputBar button { width: 46px !important; height: 46px !important; }
+  #leaveRoom { bottom: 80px !important; left: 15px !important; z-index: 9999; }
 }
 
 /* animations */
 @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 @keyframes msgIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+/* ===========================================================
+   PRIVATE ROOM SLIDESHOW
+   =========================================================== */
+.slideshow-layer { position: fixed; inset:0; z-index:-1; background-size: cover; background-position:center; background-repeat:no-repeat; opacity:0; transition: opacity 1.8s ease-in-out; }
+.slideshow-layer.top { opacity:1; }
