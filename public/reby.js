@@ -113,6 +113,8 @@ joinBtn.addEventListener('click', () => {
   username = v;
   localStorage.setItem('chat_name', username);
   showApp();
+  // ensure heading displays global heading when joining
+  heading.textContent = 'CHAT FOR FUN NOT FOR GUN🌛❤️';
   socket.emit('joinGlobal', username);
 });
 nameInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') joinBtn.click(); });
@@ -142,7 +144,8 @@ leaveRoomBtn?.addEventListener('click', () => {
   if (!username) return;
   socket.emit('leaveRoom', { name: username, room: currentRoom });
   currentRoom = 'global';
-  heading.textContent = 'AVARATHAM PARAYUKA POVUKA ✨';
+  // restore the global heading when leaving a private room
+  heading.textContent = 'CHAT FOR FUN NOT FOR GUN🌛❤️';
   stopSlideshow();
   document.body.style.backgroundImage = "url('https://files.catbox.moe/3jvej7.jpg')";
   musicEnabled = false;
@@ -165,7 +168,8 @@ socket.on('roomCreated', (code) => {
   if (toggleMusicBtn) toggleMusicBtn.textContent = "🎵 Music: ON";
   startMusic();
   startSlideshow();
-  heading.textContent = 'MOOD ALLEEE';
+  // private room heading
+  heading.textContent = 'FREECHAT';
   leaveRoomBtn.classList.remove('hidden');
   socket.emit('requestActive', code);
   socket.emit('clearChat');
@@ -177,7 +181,8 @@ socket.on('roomJoined', (code) => {
   if (toggleMusicBtn) toggleMusicBtn.textContent = "🎵 Music: ON";
   startMusic();
   startSlideshow();
-  heading.textContent = 'MOOD ALLEEE';
+  // private room heading
+  heading.textContent = 'FREECHAT';
   leaveRoomBtn.classList.remove('hidden');
   socket.emit('requestActive', code);
   socket.emit('clearChat');
