@@ -77,7 +77,7 @@ Render automatically provides a live public URL.
 
 💜 Credits
 Created with ❤️ by Thejus (@jarviss4334)
-Inspired by the Malayalam vibe of “Per Parada Myre” 🔱
+Inspired by some avaratham sites
 
 📸 Preview
 Global Chat:
