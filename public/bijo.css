@@ -7,7 +7,7 @@
 
 /* =======================================================================
    RESET & GLOBAL
-======================================================================= */
+   ======================================================================= */
 * {
   box-sizing: border-box;
 }
@@ -29,7 +29,7 @@ body {
 
 /* =======================================================================
    OVERLAY (LOGIN)
-======================================================================= */
+   ======================================================================= */
 .overlay {
   position: fixed;
   inset: 0;
@@ -86,7 +86,7 @@ body {
 
 /* =======================================================================
    TOPBAR & HEADING
-======================================================================= */
+   ======================================================================= */
 .topbar {
   display: flex;
   align-items: center;
@@ -111,7 +111,7 @@ body {
 
 /* =======================================================================
    MENU (3 DOTS)
-======================================================================= */
+   ======================================================================= */
 .menuWrap {
   position: absolute;
   right: 18px;
@@ -136,6 +136,7 @@ body {
   background: rgba(0,0,0,0.45);
   backdrop-filter: blur(6px);
   box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+  z-index: 100; /* desktop default */
 }
 
 .menuItem {
@@ -165,7 +166,7 @@ body {
 
 /* =======================================================================
    LAYOUT
-======================================================================= */
+   ======================================================================= */
 .content {
   display: flex;
   height: calc(100vh - 68px);
@@ -181,6 +182,7 @@ body {
   overflow: auto;
   background: rgba(0,0,0,0.35);
   backdrop-filter: blur(6px);
+  z-index: 2;
 }
 
 .sidebar h3 {
@@ -216,7 +218,7 @@ body {
 
 /* =======================================================================
    CHAT COLUMN
-======================================================================= */
+   ======================================================================= */
 .chatColumn {
   flex: 1;
   display: flex;
@@ -286,7 +288,7 @@ body {
 
 /* =======================================================================
    TYPING INDICATOR
-======================================================================= */
+   ======================================================================= */
 .typingIndicator {
   height: 24px;
   padding: 6px 12px;
@@ -309,7 +311,7 @@ body {
 
 /* =======================================================================
    INPUT BAR
-======================================================================= */
+   ======================================================================= */
 .inputBar {
   display: flex;
   gap: 10px;
@@ -341,8 +343,8 @@ body {
 }
 
 /* =======================================================================
-   MOBILE RESPONSIVE
-======================================================================= */
+   MOBILE RESPONSIVE (ONLY THIS BLOCK IS ADJUSTED)
+   ======================================================================= */
 @media (max-width: 780px) {
 
   body {
@@ -363,6 +365,7 @@ body {
     padding: 10px;
     margin-bottom: 6px;
     border-radius: 10px;
+    z-index: 1; /* ensure menu popup sits above sidebar */
   }
 
   .chatColumn {
@@ -370,23 +373,27 @@ body {
     display: flex;
     flex-direction: column;
     height: calc(100vh - 230px) !important;
+    position: relative;
   }
 
+  /* ensure messages have enough bottom space so input + typingIndicator don't overlap content */
   .messages {
     flex: 1;
-    padding-bottom: 90px !important;
+    padding-bottom: calc(var(--mobile-input-height, 70px) + 20px) !important;
     overflow-y: auto !important;
   }
 
+  /* inputbar becomes fixed at bottom on mobile (unchanged behavior) */
   .inputBar {
     left: 0;
     right: 0;
     bottom: 0;
     padding: 12px !important;
     position: fixed !important;
-    z-index: 9999;
+    z-index: 99999; /* above most stuff */
     backdrop-filter: blur(8px);
     background: rgba(0,0,0,0.55);
+    --mobile-input-height: 70px; /* used to calculate typingIndicator/messaging padding */
   }
 
   .inputBar input {
@@ -401,13 +408,46 @@ body {
   #leaveRoom {
     bottom: 80px !important;
     left: 15px !important;
-    z-index: 9999;
+    z-index: 99999;
+  }
+
+  /* Typing indicator: positioned inside the messaging area directly above the input bubble.
+     It's fixed so it stays visible above the fixed input bar but remains visually within
+     messaging interface. This ensures it does not float unexpectedly elsewhere. */
+  .typingIndicator {
+    position: fixed;
+    left: 12px;
+    right: 12px;
+    bottom: calc(var(--mobile-input-height, 70px) + 8px);
+    z-index: 99998;
+    text-align: left;
+    padding: 6px 12px;
+    height: auto;
+    display: block;
+  }
+
+  /* Menu popup: keep same look but ensure it's above sidebar (M3).
+     Make it fixed and to the right so it doesn't get covered by the active list. */
+  .menuPopup {
+    position: fixed !important;
+    top: 56px !important;
+    right: 12px !important;
+    z-index: 100000 !important;
+    min-width: 150px;
+  }
+
+  /* ensure the menu button sits visibly on top (three dots) */
+  .menuWrap {
+    position: absolute;
+    right: 12px;
+    top: 8px;
+    z-index: 100001;
   }
 }
 
 /* =======================================================================
    ANIMATIONS
-======================================================================= */
+   ======================================================================= */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(6px); }
   to   { opacity: 1; transform: none; }
@@ -420,7 +460,7 @@ body {
 
 /* =======================================================================
    PRIVATE ROOM SLIDESHOW
-======================================================================= */
+   ======================================================================= */
 .slideshow-layer {
   position: fixed;
   inset: 0;
